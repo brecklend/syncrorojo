@@ -26,14 +26,10 @@ app.get('/syncrorojo', function(req, res) {
 				var h4ca = divbox.children('h4');
 
 				$(divbox).each(function(i, ele) {
-					console.log('State: ' + $(this).text());
+					if ($(this).text() == "Alaska") {
+						console.log("Found it");
+					}
 				});
-				// var container = data.find('h4').text() == 'Alaska';
-				// var cities = container.children();
-
-				// for(var i = 0; i < cities.length; i++) {
-				// 	console.log('city');
-				// }
 			});
 
 			// var title, release, rating;
