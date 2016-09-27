@@ -21,42 +21,20 @@ app.get('/syncrorojo', function(req, res) {
 
 			$('h1 a[name=US]').filter(function() {
 				var data = $(this).parent(); //<h1><a name="US"></a>US</h1>
-				var divcolmask = data.siblings('.colmask').first(); //<div
-				var divbox = divcolmask.children('.box');
-				var h4ca = divbox.children('h4');
+				var divcolmask = data.siblings('.colmask').first(); //<div class="colmask">
+				var divbox = divcolmask.children('.box'); //<div class="box box_1">
 
-				$(divbox).each(function(i, ele) {
-					if ($(this).text() == "Alaska") {
-						console.log("Found it");
-					}
+				var state = $('h4:contains("Alaska")');
+				var cities = $(state).next('ul').children();
+
+				//console.log($(alaskanCities).html());
+
+				$(cities).each(function(ind, ele) {
+					var link = $(this).find('a').attr('href').replace('//', 'http://');
+					var cityName = $(this).text();
+					console.log(cityName + ': ' + link);
 				});
 			});
-
-			// var title, release, rating;
-			// var json = { title: "", release: "", rating: ""};
-
-			// $('h1').filter(function() {
-			// 	var data = $(this);
-
-			// 	title = data.text();
-			// 	release = data.children().first().children().first().text();
-
-			// 	json.title = title;
-			// 	console.log('json.title: ' + json.title);
-			// 	json.release = release;
-			// });
-
-			// $('span[itemprop=ratingValue]').filter(function() {
-			// 	var data = $(this);
-
-			// 	rating = data.text();
-
-			// 	json.rating = rating;
-			// });
-
-			// fs.writeFile('output.json', JSON.stringify(json, null, 4), function(err) {
-			// 	console.log('File successfully written! - Check your project directory for the output.json file');
-			// });
 
 			res.send('Check your console!');
 		}
