@@ -13,15 +13,15 @@ app.get('/syncrorojo', function(req, res) {
 	//For development, get cl pages and host them locally
 	//var url = 'http://localhost/cl/sites';
 
-	var url = 'http://localhost:8081/sites.html';
+	var url = 'http://localhost/cl/sites.html';
 
 	request(url, function(error, response, html) {
 		if(!error) {
 			var $ = cheerio.load(html);
 
 			$('h1 a[name=US]').filter(function() {
-				var data = $(this).parent();
-				var divcolmask = data.siblings('.colmask').first();
+				var data = $(this).parent(); //<h1><a name="US"></a>US</h1>
+				var divcolmask = data.siblings('.colmask').first(); //<div
 				var divbox = divcolmask.children('.box');
 				var h4ca = divbox.children('h4');
 
@@ -58,7 +58,7 @@ app.get('/syncrorojo', function(req, res) {
 			// 	console.log('File successfully written! - Check your project directory for the output.json file');
 			// });
 
-			// res.send('Check your console!');
+			res.send('Check your console!');
 		}
 		else {
 			console.log('error');
