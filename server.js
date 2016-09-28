@@ -27,8 +27,6 @@ app.get('/syncrorojo', function(req, res) {
 				var state = $('h4:contains("Alaska")');
 				var cities = $(state).next('ul').children();
 
-				//console.log($(alaskanCities).html());
-
 				$(cities).each(function(ind, ele) {
 					var link = $(this).find('a').attr('href').replace('//', 'http://');
 					var cityName = $(this).text();
