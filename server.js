@@ -19,7 +19,8 @@ var cs = require("./_cl");
 	request(url, function(error, response, html) {
 		if(!error) {
 			var $ = cheerio.load(html);
-			var locationUrls = [];
+			//var locationUrls = [];
+			var json = [];
 
 			$("h4").filter(function() {
 				var stateName = $(this).text();
@@ -29,14 +30,19 @@ var cs = require("./_cl");
 
 				if (searchStates.exec(stateName)) {
 					//console.log('stateName:', stateName);
+					json.push({"State": { "Name": stateName, "Cities": []}});
 					var cities = $(this).next('ul').children();
 					/*<<<DEV>>>*/ cities = '<li><a href="//flagstaff.craigslist.org/">flagstaff / sedona</a></li>';
 
 					$(cities).each(function() {
 						var cityName = $(this).text();
 						var cityUrl = $(this).find("a").attr("href");
+
+						console.log("before", json[0].State.Cities.length);
+						json[0].State.Cities.push({ "Name": cityName, "Url": cityUrl, "Listings": []});
+						console.log("after", json[0].State.Cities.length);
+
 						var citySearchUrl = cs.BuildClSearchUrl(cityUrl);
-						//console.log("citySearchUrl:", citySearchUrl);
 
 						request(citySearchUrl, function(error, response, html) {
 							if(!error) {
@@ -64,11 +70,11 @@ var cs = require("./_cl");
 							}
 						});
 
-						locationUrls.push(cityUrl);
-						//console.log("cityName:", cityName, "- cityUrl:", cityUrl);
+						//locationUrls.push(cityUrl);
 					});
 				}
 			});
+			console.log("json", json);
 			return;
 
 			//console.log("locationUrls", locationUrls);
