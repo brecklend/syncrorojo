@@ -1,0 +1,39 @@
+[
+	{
+		"State": {
+			"Name": "Arizona",
+			"Cities": [
+				{
+					"Name": "Flagstaff",
+					"Url": "http://flagstaff.craigslist.org/",
+					"Listings": [
+						{
+							"Id": "5780376329",
+							"Title": "2002 CHRYSLER TOWN &amp; COUNTRY",
+							"Price": [2800],
+							"Location": "FLAG",
+							"DateTime": ["2016-09-25 08:10"],
+							"Status": "ignore"
+						},
+						{
+							"Id": "5797773459",
+							"Title": "2001 E450 * 4 X 4 * BOX VAN! NICE!",
+							"Price": [6500],
+							"Location": "PAYSON",
+							"DateTime": ["2016-09-24 17:06"],
+							"Status": "ignore"
+						},
+						{
+							"Id": "5787770027",
+							"Title": "94 gmc safari awd",
+							"Price": [3000, 1500],
+							"Location": "w flag",
+							"DateTime": ["2016-09-18 13:32", "2016-09-28 11:32"],
+							"Status": "tracking"
+						}
+					]
+				}
+			]
+		}
+	}
+]

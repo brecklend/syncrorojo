@@ -19,8 +19,6 @@ var cs = require("./_cl");
 	request(url, function(error, response, html) {
 		if(!error) {
 			var $ = cheerio.load(html);
-
-			var searchData = [];
 			var locationUrls = [];
 
 			$("h4").filter(function() {
@@ -32,16 +30,46 @@ var cs = require("./_cl");
 				if (searchStates.exec(stateName)) {
 					//console.log('stateName:', stateName);
 					var cities = $(this).next('ul').children();
+					/*<<<DEV>>>*/ cities = '<li><a href="//flagstaff.craigslist.org/">flagstaff / sedona</a></li>';
 
 					$(cities).each(function() {
 						var cityName = $(this).text();
 						var cityUrl = $(this).find("a").attr("href");
+						var citySearchUrl = cs.BuildClSearchUrl(cityUrl);
+						//console.log("citySearchUrl:", citySearchUrl);
+
+						request(citySearchUrl, function(error, response, html) {
+							if(!error) {
+								var $ = cheerio.load(html);
+
+								//before storing as json
+								//cross-match against ignore.json
+
+								$("h4").prevAll().filter(function() {
+									var id = $(this).attr("data-pid");
+									var title = $(this).find(".hdrlnk").text();
+									var price = $(this).find(".price").first().text().replace("$", "");
+									var location = $(this).find("small").text().replace("(", "").replace(")", "");
+									var datetime = $(this).find("time").attr("datetime");
+									
+									//console.log("id:", id);
+									//console.log("title:", title);
+									//console.log("price:", price);
+									//console.log("datetime:", datetime);
+									//console.log("location:", location);
+								});
+							}
+							else {
+								console.log("Failed to request city search URL");
+							}
+						});
 
 						locationUrls.push(cityUrl);
 						//console.log("cityName:", cityName, "- cityUrl:", cityUrl);
 					});
 				}
 			});
+			return;
 
 			//console.log("locationUrls", locationUrls);
 
@@ -49,8 +77,32 @@ var cs = require("./_cl");
 
 			$(locationUrls).each(function(index, value) {
 				var url = cs.BuildClSearchUrl(value);
+				//console.log(url);
+				request(url, function(error, response, html) {
+					if(!error) {
+						var $ = cheerio.load(html);
 
-				console.log(url);
+						//before storing as json
+						//cross-match against ignore.json
+
+						$("h4").prevAll().filter(function() {
+							var id = $(this).attr("data-pid");
+							var title = $(this).find(".hdrlnk").text();
+							var price = $(this).find(".price").first().text().replace("$", "");
+							var location = $(this).find("small").text().replace("(", "").replace(")", "");
+							var datetime = $(this).find("time").attr("datetime");
+							
+							//console.log("id:", id);
+							//console.log("title:", title);
+							//console.log("price:", price);
+							//console.log("datetime:", datetime);
+							//console.log("location:", location);
+						});
+					}
+					else {
+						console.log("Failed to request city search URL");
+					}
+				});
 			});
 
 			//res.send('Check your console!');

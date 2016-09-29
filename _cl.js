@@ -1,6 +1,7 @@
 
 exports.BuildClSearchUrl = function(cityUrl) {
-	return cityUrl;
+	/*<<<DEV>>>*/ return "http://localhost/cl/results.html";
+	//return "http://localhost/cl/" + cityUrl.substring(2, cityUrl.indexOf(".")) + ".html";
 	return replaceProtocalPrefix(cityUrl) + getUrlSearchString() + getKeywords();
 }
 
