@@ -6,14 +6,15 @@
 //For development, get cl pages and host them locally
 //var url = 'http://localhost/cl/sites';
 
-var express = require('express');
-var fs = require('fs');
-var request = require('request');
-var cheerio = require('cheerio');
+var express = require("express");
+var fs = require("fs");
+var request = require("request");
+var cheerio = require("cheerio");
 var app = express();
+var cs = require("./_cl");
 
-//app.get('/syncrorojo', function(req, res) {
-	var url = 'http://localhost/cl/sites.html';
+//app.get("/syncrorojo", function(req, res) {
+	var url = "http://localhost/cl/sites.html";
 
 	request(url, function(error, response, html) {
 		if(!error) {
@@ -22,12 +23,10 @@ var app = express();
 			var searchData = [];
 			var locationUrls = [];
 
-			$('h4').filter(function() {
+			$("h4").filter(function() {
 				var stateName = $(this).text();
 				var searchStr = "Washington|Oregon|California|Arizona|Utah|Idaho|Nevada";
-				//<<<DEV>>>>>>>>>>>>>
-				searchStr = "Alaska|Arizona";
-				//<<<<<<<<<<<<<<<<<<<
+				/*<<<DEV>>>*/ searchStr = "Arizona";
 				var searchStates = new RegExp(searchStr);
 
 				if (searchStates.exec(stateName)) {
@@ -36,7 +35,7 @@ var app = express();
 
 					$(cities).each(function() {
 						var cityName = $(this).text();
-						var cityUrl = $(this).find("a").attr("href").replace("//", "http://");
+						var cityUrl = $(this).find("a").attr("href");
 
 						locationUrls.push(cityUrl);
 						//console.log("cityName:", cityName, "- cityUrl:", cityUrl);
@@ -44,7 +43,15 @@ var app = express();
 				}
 			});
 
-			console.log("locationUrls", locationUrls);
+			//console.log("locationUrls", locationUrls);
+
+			/*<<<DEV>>>*/ locationUrls = ["http://localhost/cl/results.html"];
+
+			$(locationUrls).each(function(index, value) {
+				var url = cs.BuildClSearchUrl(value);
+
+				console.log(url);
+			});
 
 			//res.send('Check your console!');
 		}
