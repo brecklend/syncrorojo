@@ -1,47 +1,59 @@
+//get array of city links within search states
+//get listings for each city
+//filter listings
+//write to json file
+
+//For development, get cl pages and host them locally
+//var url = 'http://localhost/cl/sites';
+
 var express = require('express');
 var fs = require('fs');
 var request = require('request');
 var cheerio = require('cheerio');
 var app = express();
 
-app.get('/syncrorojo', function(req, res) {
-	//get array of city links within search states
-	//get listings for each city
-	//filter listings
-	//write to json file
-
-	//For development, get cl pages and host them locally
-	//var url = 'http://localhost/cl/sites';
-
+//app.get('/syncrorojo', function(req, res) {
 	var url = 'http://localhost/cl/sites.html';
 
 	request(url, function(error, response, html) {
 		if(!error) {
 			var $ = cheerio.load(html);
 
-			$('h1 a[name=US]').filter(function() {
-				var data = $(this).parent(); //<h1><a name="US"></a>US</h1>
-				var divcolmask = data.siblings('.colmask').first(); //<div class="colmask">
-				var divbox = divcolmask.children('.box'); //<div class="box box_1">
+			var searchData = [];
+			var locationUrls = [];
 
-				var state = $('h4:contains("Alaska")');
-				var cities = $(state).next('ul').children();
+			$('h4').filter(function() {
+				var stateName = $(this).text();
+				var searchStr = "Washington|Oregon|California|Arizona|Utah|Idaho|Nevada";
+				//<<<DEV>>>>>>>>>>>>>
+				searchStr = "Alaska|Arizona";
+				//<<<<<<<<<<<<<<<<<<<
+				var searchStates = new RegExp(searchStr);
 
-				$(cities).each(function(ind, ele) {
-					var link = $(this).find('a').attr('href').replace('//', 'http://');
-					var cityName = $(this).text();
-					console.log(cityName + ': ' + link);
-				});
+				if (searchStates.exec(stateName)) {
+					//console.log('stateName:', stateName);
+					var cities = $(this).next('ul').children();
+
+					$(cities).each(function() {
+						var cityName = $(this).text();
+						var cityUrl = $(this).find("a").attr("href").replace("//", "http://");
+
+						locationUrls.push(cityUrl);
+						//console.log("cityName:", cityName, "- cityUrl:", cityUrl);
+					});
+				}
 			});
 
-			res.send('Check your console!');
+			console.log("locationUrls", locationUrls);
+
+			//res.send('Check your console!');
 		}
 		else {
 			console.log('error');
 		}
 	});
-});
+//});
 
-app.listen('8081');
-console.log('port 8081');
-exports = module.exports = app;
+// app.listen('8081');
+// console.log('port 8081');
+// exports = module.exports = app;

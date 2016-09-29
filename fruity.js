@@ -7,3 +7,4 @@ var html =
 var cheerio = require('cheerio'), $ = cheerio.load(html);
 
 console.log($('.apple', '#fruits').text());
+console.log($('li[class=orange]').html());
