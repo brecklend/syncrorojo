@@ -31,6 +31,7 @@ var cs = require("./_cl");
 				if (searchStates.exec(stateName)) {
 					//console.log('stateName:', stateName);
 					json.push({"State": { "Name": stateName, "Cities": []}});
+					
 					var cities = $(this).next('ul').children();
 					/*<<<DEV>>>*/ cities = '<li><a href="//flagstaff.craigslist.org/">flagstaff / sedona</a></li>';
 
@@ -38,9 +39,7 @@ var cs = require("./_cl");
 						var cityName = $(this).text();
 						var cityUrl = $(this).find("a").attr("href");
 
-						console.log("before", json[0].State.Cities.length);
 						json[0].State.Cities.push({ "Name": cityName, "Url": cityUrl, "Listings": []});
-						console.log("after", json[0].State.Cities.length);
 
 						var citySearchUrl = cs.BuildClSearchUrl(cityUrl);
 
@@ -48,15 +47,14 @@ var cs = require("./_cl");
 							if(!error) {
 								var $ = cheerio.load(html);
 
-								//before storing as json
-								//cross-match against ignore.json
-
 								$("h4").prevAll().filter(function() {
 									var id = $(this).attr("data-pid");
 									var title = $(this).find(".hdrlnk").text();
 									var price = $(this).find(".price").first().text().replace("$", "");
 									var location = $(this).find("small").text().replace("(", "").replace(")", "");
 									var datetime = $(this).find("time").attr("datetime");
+
+									json[0].State.Cities[0].Listings.push({ "Id": id, "Title": title, "Price": price, "Location": location, "DateTime": datetime, "Status": ""});
 									
 									//console.log("id:", id);
 									//console.log("title:", title);
