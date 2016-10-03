@@ -13,6 +13,7 @@
 							"Price": [2800],
 							"Location": "FLAG",
 							"DateTime": ["2016-09-25 08:10"],
+							"Url": "",
 							"Status": "ignore"
 						},
 						{
@@ -21,6 +22,7 @@
 							"Price": [6500],
 							"Location": "PAYSON",
 							"DateTime": ["2016-09-24 17:06"],
+							"Url": "",
 							"Status": "ignore"
 						},
 						{
@@ -29,11 +31,17 @@
 							"Price": [3000, 1500],
 							"Location": "w flag",
 							"DateTime": ["2016-09-18 13:32", "2016-09-28 11:32"],
+							"Url": "",
 							"Status": "tracking"
 						}
 					]
 				}
 			]
+		}
+	},
+	{
+		"State": {
+
 		}
 	}
 ]

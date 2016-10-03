@@ -19,9 +19,8 @@ var cs = require("./_cl");
 	request(url, function(error, response, html) {
 		if(!error) {
 			var $ = cheerio.load(html);
-			//var locationUrls = [];
 			var json = [];
-			var cnt = 0;
+			var jcnt = 0;
 
 			$("h4").filter(function() {
 				var stateName = $(this).text();
@@ -41,12 +40,17 @@ var cs = require("./_cl");
 						var cityName = $(this).text();
 						var cityUrl = $(this).find("a").attr("href");
 
-						json[cnt].State.Cities.push({ "Name": cityName, "Url": cityUrl, "Listings": [] });
+						json[jcnt].State.Cities.push({ "Name": cityName, "Url": cityUrl, "Listings": [] });
 
 						var citySearchUrl = cs.BuildClSearchUrl(cityUrl);
-						//console.log("Listings", json[cnt].State.Cities.length);
-
+						//console.log("Listings", json[jcnt].State.Name + " - " + json[jcnt].State.Cities[cityCnt].Name);
+						//console.log(json[jcnt].State.Name);
+						
+						var cityListings = [];
+						console.log("before citySearchUrl");
 						request(citySearchUrl, function(error, response, html) {
+							//console.log("jcnt:", jcnt, " cityCnt:", cityCnt);
+							//console.log(json[jcnt].State.Name);
 							if(!error) {
 								var $ = cheerio.load(html);
 
@@ -57,20 +61,22 @@ var cs = require("./_cl");
 									var location = $(this).find("small").text().replace("(", "").replace(")", "");
 									var datetime = $(this).find("time").attr("datetime");
 
+									cityListings.push({ "Id": id, "Title": title});
 									
-
-									//json[cnt].State.Cities[cityCnt].Listings.push({ "Id": id, "Title": title, "Price": price, "Location": location, "DateTime": datetime, "Status": ""});
+									//json[jcnt].State.Cities[cityCnt].Listings.push({ "Id": id, "Title": title, "Price": price, "Location": location, "DateTime": datetime, "Status": ""});
 								});
 							}
 							else {
 								console.log("Failed to request city search URL");
 							}
+							console.log("inside length", cityListings.length);
 						});
 
+						console.log("outside length", cityListings.length);
 						cityCnt += 1;
 					});
 
-					cnt += 1;
+					jcnt += 1;
 				}
 			});
 
