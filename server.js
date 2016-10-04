@@ -5,6 +5,71 @@ var cheerio = require("cheerio");
 var app = express();
 var cs = require("./_cl");
 
+var cityUrl = "http://localhost/cl/results.html";
+
+var listings = [];
+
+for(var i = 0; i < 2; i++) {
+	//go through json and get each State.Cities[].Url
+	//call GetListingsFor(State.Cities[n].Url)
+	listings.push(GetListingsFor(cityUrl));
+}
+
+console.log("listings.length:", listings.length);
+
+//takes city URL string
+//returns json of listing(s)
+function GetListingsFor(cityUrl) {
+	console.log("GetListingsFor.city:", cityUrl);
+
+	var p1 = new Promise(function(resolve, reject) {
+		console.log("p1");
+		request(cityUrl, function(error, response, html) {
+			if(!error) {
+				console.log("success");
+				resolve({"Id":"5780376329","Title":"94 gmc safari awd"});
+			}
+			else {
+				throw "fail";
+			}
+		});
+	});
+
+	p1.then(function(val) {
+		console.log("then.val:", val);
+		return val;
+	}).catch(function(reason) {
+		console.log("reason:", reason);
+	});
+}
+
+function GetListingsForCitiesBasedOnStates() {
+	console.log("start");
+
+	var p1 = new Promise(function(resolve, reject) {
+		console.log("p1");
+		request("http://localhost/cl/sites.html", function(error, response, html) {
+			if(!error) {
+				console.log("success");
+				resolve("success");
+			}
+			else {
+				console.log("fail");
+				throw "fail";
+			}
+		});
+	});
+
+	p1.then(function(val) {
+		console.log("then.val:", val);
+	}).catch(function(reason) {
+		console.log("reason:", reason);
+	});
+}
+
+//GetListingsForCitiesBasedOnStates();
+
+/////////////////////////////////////////////////////////////////////////////////////////////////////
 
 var getCitiesFor = function(states, callback) {
 	console.log("getCitiesFor");
@@ -53,18 +118,18 @@ var getListingsFor = function(cities, callback) {
 	}
 };
 
-getCitiesFor("Arizona|California", function(err, result) {
-	console.log("finished");
-	if(!err) {
-		//result = complete json
-		//console.log("result:", result);
-	}
-	else {
-		console.log("err:", err);
-	}
-});
+// getCitiesFor("Arizona|California", function(err, result) {
+// 	console.log("finished");
+// 	if(!err) {
+// 		//result = complete json
+// 		//console.log("result:", result);
+// 	}
+// 	else {
+// 		console.log("err:", err);
+// 	}
+// });
 
-
+////////////////////////////////////////////////////////////////////////////////////////////////
 
 // var getCitiesFor = function(states, callback) {
 // 	var sitesUrl = "http://localhost/cl/sites.html";
