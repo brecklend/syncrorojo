@@ -67,9 +67,12 @@ function GetListingsFor(city, url, callback) {
 			$("h4").prevAll().filter(function() {
 				var id = $(this).attr("data-pid");
 				var title = $(this).find(".hdrlnk").text();
+				var price = $(this).find(".price").first().text().replace("$", "");
+				var location = $(this).find("small").text().replace("(", "").replace(")", "");
+				var datetime = $(this).find("time").attr("datetime");
 
 				//console.log("GetListingsFor", id, title);
-				listings.push({"Id": id, "Title": title});
+				listings.push({"Id": id, "Title": title, "Price": price, "Location": location, "DateTime": datetime});
 			});
 
 			//console.log("end");
@@ -99,6 +102,10 @@ function AddListingsToCity(city, listings) {
 			}
 		}
 	}
+
+	fs.writeFile("syncroRojo.json", JSON.stringify(json, null, 4), function(err) {
+		console.log("wrote file");
+	});
 	//console.log("******************************", JSON.stringify(json));
 }
 
