@@ -1,6 +1,9 @@
 var fs = require("fs");
 
+var listings;
+
 exports.getAll = function(req, res) {
+	getListings();
 	res.send(listings);
 };
 
@@ -20,23 +23,17 @@ exports.ignore = function(req, res) {
 	res.send();
 };
 
-var listings = [
-	{
-		"id": 1,
-		"title": "one",
-		"status": "new"
-	},
-	{
-		"id": 2,
-		"title": "two",
-		"status": "tracked"
-	},
-	{
-		"id": 3,
-		"title": "three",
-		"status": "ignore"
-	}
-];
+function getListings() {
+	fs.readFile("./data/listings.json", "utf8", (err, data) => {
+		if (!err) {
+			listings = JSON.parse(data);
+		}
+		else {
+			console.log("read json file failure");
+			listings = [];
+		}
+	});
+}
 
 function getListingsFor(statusType) {
 	var list = [];
