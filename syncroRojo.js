@@ -144,6 +144,22 @@ function getDateTimeArrayFor(cityName, listingId) {
 	return [];
 }
 
+function getStatusFor(cityName, listingId) {
+	for (var i = 0; i < json.length; i++) {
+		for (var j = 0; j < json[i].State.Cities.length; j++) {
+			if (json[i].State.Cities[j].Name == cityName) {
+				for (var k = 0; k < json[i].State.Cities[j].Listings.length; k++) {
+					if (json[i].State.Cities[j].Listings[k].Id == listingId) {
+						return json[i].State.Cities[j].Listings[k].Status;
+					}
+				}
+			}
+		}
+	}
+
+	return "";
+}
+
 function GetListingsFor(cityName, url, callback) {
 	var listings = [];
 
@@ -160,6 +176,7 @@ function GetListingsFor(cityName, url, callback) {
 
 				var priceAry = getPriceArrayFor(cityName, id);
 				var dateTimeAry = getDateTimeArrayFor(cityName, id);
+				var status = getStatusFor(cityName, id);
 				
 				if (priceAry[priceAry.length - 1] != price) {
 					priceAry.push(parseInt(price));
@@ -171,7 +188,8 @@ function GetListingsFor(cityName, url, callback) {
 					"Title": title,
 					"Price": priceAry,
 					"Location": location,
-					"DateTime": dateTimeAry
+					"DateTime": dateTimeAry,
+					"Status": status
 				};
 
 				listings.push(listing);
