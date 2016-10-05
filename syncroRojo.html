@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title>~SyncroRojo~</title>
+	<script src="jquery-3.1.1.min.js"></script>
+</head>
+<body>
+	<ul id="new-listings"></ul>
+	<ul id="tracked-listings"></ul>
+	<script>
+		$(document).ready(function() {
+			console.log("ready");
+			getJsonFile2("http://localhost/cl/syncroRojo.json");
+			console.log("done");
+		});
+
+		function getJsonFile2(url) {
+			$.getJSON(url, function(data) {
+				console.log("success", data);
+				var newListings = "";
+				var trackedListings ="";
+
+				$.each(data, function(key, val) {
+					var stateName = val.State.Name;
+					
+					//str += "<li>" + key + ": " + val + "</li>";
+				});
+
+				$("ul#new-listings").html(newListings);
+				$("ul#tracked-listings").html(trackedListings);
+			});
+		}
+
+		function getJsonFile(url) {
+			$.ajax({
+				dataType: "json",
+				url: url,
+				success: function(data) {
+					var json = JSON.parse(data);
+					console.log("json", json);
+					//console.log("data", JSON.parse(data));
+				},
+				error: function(x, y, z) {
+					console.log("fail");
+				}
+			});
+		}
+	</script>
+</body>
+</html>

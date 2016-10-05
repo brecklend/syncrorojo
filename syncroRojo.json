@@ -5,7 +5,7 @@
             "Cities": [
                 {
                     "Name": "flagstaff / sedona",
-                    "Url": "//flagstaff.craigslist.org/",
+                    "Url": "http://localhost/cl/flagstaff.html",
                     "Listings": [
                         {
                             "Id": "5787770027",
@@ -23,13 +23,15 @@
                             "Id": "5797773459",
                             "Title": "2001 E450 * 4 X 4 * BOX VAN! NICE!",
                             "Price": [
-                                6500
+                                6500,
+                                6000
                             ],
                             "Location": " PAYSON",
                             "DateTime": [
+                                "2016-09-24 17:06",
                                 "2016-09-24 17:06"
                             ],
-                            "Status": ""
+                            "Status": "Tracking"
                         },
                         {
                             "Id": "5780376329",
@@ -54,41 +56,41 @@
             "Cities": [
                 {
                     "Name": "bakersfield",
-                    "Url": "//bakersfield.craigslist.org/",
+                    "Url": "http://localhost/cl/bakersfield.html",
                     "Listings": [
                         {
-                            "Id": "5787770027",
-                            "Title": "94 gmc safari awd",
+                            "Id": "5792506890",
+                            "Title": "Mini van Saturn Relay 2005 for sale. 128000 miles",
+                            "Price": [
+                                3500
+                            ],
+                            "Location": "lvg",
+                            "DateTime": [
+                                "2016-09-28 06:48"
+                            ],
+                            "Status": ""
+                        },
+                        {
+                            "Id": "5795692471",
+                            "Title": "Great mini-van Saturn - 2005,$3550",
+                            "Price": [
+                                3550
+                            ],
+                            "Location": "lvg",
+                            "DateTime": [
+                                "2016-09-29 10:45"
+                            ],
+                            "Status": ""
+                        },
+                        {
+                            "Id": "5798491459",
+                            "Title": "1998 chevrolet all wheel drive astro van",
                             "Price": [
                                 1500
                             ],
-                            "Location": " w flag",
+                            "Location": "prc > White Spar Prescott",
                             "DateTime": [
-                                "2016-09-18 13:32"
-                            ],
-                            "Status": ""
-                        },
-                        {
-                            "Id": "5797773459",
-                            "Title": "2001 E450 * 4 X 4 * BOX VAN! NICE!",
-                            "Price": [
-                                6500
-                            ],
-                            "Location": " PAYSON",
-                            "DateTime": [
-                                "2016-09-24 17:06"
-                            ],
-                            "Status": ""
-                        },
-                        {
-                            "Id": "5780376329",
-                            "Title": "2002 CHRYSLER TOWN & COUNTRY",
-                            "Price": [
-                                2000
-                            ],
-                            "Location": " FLAG",
-                            "DateTime": [
-                                "2016-09-25 08:10"
+                                "2016-09-27 10:37"
                             ],
                             "Status": ""
                         }
