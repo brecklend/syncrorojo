@@ -21,7 +21,7 @@ exports.track = function(req, res) {
 };
 
 exports.ignore = function(req, res) {
-	res.send(["server ignore success"]);
+	res.send({ "Success": true, "Message": "" });
 };
 
 function getListings() {

@@ -1,6 +1,6 @@
 var baseUrl = "http://localhost:8081/";
-var trackBtn = "<button type='button' class='btn btn-default btn-xs btn-track'><i class='fa fa-check' /></button>";
-var ignoreBtn = "<button type='button' class='btn btn-default btn-xs btn-ignore'><i class='fa fa-close' /></button>";
+var trackBtn = "<button type='button' onclick='trackListing(this)' class='btn btn-default btn-xs btn-track'><i class='fa fa-check' /></button>";
+var ignoreBtn = "<button type='button' onclick='ignoreListing(this)' class='btn btn-default btn-xs btn-ignore'><i class='fa fa-close' /></button>";
 
 $(document).ready(function() {
 	getListingsFor("newListings");
@@ -100,7 +100,7 @@ function display(listings) {
 		}
 	});
 
-	addButtonListener();
+	//addButtonListener();
 }
 
 function getActionButtonsFor(status) {
@@ -128,14 +128,12 @@ function getFirstItemIn(ary) {
 	return ary[0];
 }
 
-function addButtonListener() {
-	$("button.btn-track").on("click", function() {
-		var id = $(this).parent().parent().attr("id");
-		apiRequest("track/" + id, trackCallback);
-	});
+function trackListing(btn) {
+	var id = $(btn).parent().parent().attr("id");
+	apiRequest("track/" + id, trackCallback);
+}
 
-	$("button.btn-ignore").on("click", function() {
-		var id = $(this).parent().parent().attr("id");
-		apiRequest("ignore/" + id, ignoreCallback);
-	});
+function ignoreListing(btn) {
+	var id = $(btn).parent().parent().attr("id");
+	apiRequest("ignore/" + id, ignoreCallback);	
 }
