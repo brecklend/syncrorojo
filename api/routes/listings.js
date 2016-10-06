@@ -1,8 +1,9 @@
 var fs = require("fs");
 
+var listingsPath = "./data/listings.json";
 var listings;
 
-getListings();
+readJson();
 
 exports.getAllListings = function(req, res) {
 	res.send(listings);
@@ -17,6 +18,16 @@ exports.getTrackedListings = function(req, res) {
 };
 
 exports.track = function(req, res) {
+	var id = req.params.id;
+
+	for (var i = 0; i < listings.length; i++) {
+		if (listings[i].id == id) {
+			listings[i].status = "tracked";
+			break;
+		}
+	}
+
+	writeJson();
 	res.send({ "Success": true, "Message": "" });
 };
 
@@ -24,17 +35,33 @@ exports.ignore = function(req, res) {
 	res.send({ "Success": true, "Message": "" });
 };
 
-function getListings() {
-	fs.readFile("./data/listings.json", "utf8", (err, data) => {
+
+
+function readJson() {
+	fs.readFile(listingsPath, "utf8", (err, data) => {
 		if (!err) {
 			listings = JSON.parse(data);
 		}
 		else {
-			console.log("read json file failure");
 			listings = [];
 		}
 	});
 }
+
+function writeJson() {
+	fs.writeFile(listingsPath, JSON.stringify(listings, null, 4), function(err) {
+		if (err) {
+			console.log("error writing file");
+		}
+		else {
+			console.log("success writing file");
+		}
+	});
+}
+
+
+
+
 
 function getListingsFor(statusType) {
 	var list = [];
@@ -46,4 +73,12 @@ function getListingsFor(statusType) {
 	}
 
 	return list;
+}
+
+function getListingFor(listingId) {
+	for (var i = 0; i < listings.length; i++) {
+		if (listings[i].id == listingId) {
+			return listings[i];
+		}
+	}
 }
