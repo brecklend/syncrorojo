@@ -36,8 +36,15 @@
 
 	<script>
 		$(document).ready(function() {
-			getJsonFile("http://localhost/cl/syncroRojo.json");
+			//getJsonFile("http://localhost/cl/syncroRojo.json");
+			getNewListings();
 		});
+
+		function getNewListings() {
+			$.getJSON("http://localhost:8081/getall", function(data) {
+				console.log("data", data);
+			});
+		}
 
 		var trackBtn = "<button type='button' class='btn btn-success btn-xs'><i class='fa fa-check' /></button>";
 		var ignoreBtn = "<button type='button' class='btn btn-danger btn-xs'><i class='fa fa-close' /></button>";
