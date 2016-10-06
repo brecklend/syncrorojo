@@ -1,6 +1,6 @@
 var express = require("express");
 var listings = require("./routes/listings");
-var cors = require("./cors");
+var cors = require("./utils/cors");
 var app = express();
 
 

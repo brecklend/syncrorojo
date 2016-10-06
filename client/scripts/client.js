@@ -44,6 +44,10 @@ function apiRequest(operation, callback) {
 	xhr.send();
 }
 
+function getListingsFor(listingType) {
+	apiRequest(listingType, displayListingsCallback);
+}
+
 function trackCallback(response) {
 	if (response.Success) {
 		console.log("successfully tracking listing");
@@ -62,11 +66,7 @@ function ignoreCallback(response) {
 	}
 }
 
-function getListingsFor(listingType) {
-	apiRequest(listingType, display);
-}
-
-function display(listings) {
+function displayListingsCallback(listings) {
 	$.each(listings, function(key, val) {
 		var id = val.id;
 		var url = val.url;
@@ -103,6 +103,9 @@ function display(listings) {
 	//addButtonListener();
 }
 
+
+
+//*** Helpers *****************************************************************
 function getActionButtonsFor(status) {
 	if (status == "new") {
 		return trackBtn + " " + ignoreBtn;
@@ -127,7 +130,11 @@ function getFirstItemIn(ary) {
 
 	return ary[0];
 }
+//*****************************************************************************
 
+
+
+//*** Listeners ***************************************************************
 function trackListing(btn) {
 	var id = $(btn).parent().parent().attr("id");
 	apiRequest("track/" + id, trackCallback);
@@ -137,3 +144,4 @@ function ignoreListing(btn) {
 	var id = $(btn).parent().parent().attr("id");
 	apiRequest("ignore/" + id, ignoreCallback);	
 }
+//*****************************************************************************

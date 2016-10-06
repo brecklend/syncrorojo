@@ -18,22 +18,18 @@ exports.getTrackedListings = function(req, res) {
 };
 
 exports.track = function(req, res) {
-	var id = req.params.id;
-
-	for (var i = 0; i < listings.length; i++) {
-		if (listings[i].id == id) {
-			listings[i].status = "tracked";
-			break;
-		}
-	}
-
+	updateListingStatusFor(req.params.id, "tracked");
 	writeJson();
 	res.send({ "Success": true, "Message": "" });
 };
 
 exports.ignore = function(req, res) {
+	updateListingStatusFor(req.params.id, "ignore");
+	writeJson();
 	res.send({ "Success": true, "Message": "" });
 };
+
+
 
 
 
@@ -75,10 +71,11 @@ function getListingsFor(statusType) {
 	return list;
 }
 
-function getListingFor(listingId) {
+function updateListingStatusFor(id, status) {
 	for (var i = 0; i < listings.length; i++) {
-		if (listings[i].id == listingId) {
-			return listings[i];
+		if (listings[i].id == id) {
+			listings[i].status = status;
+			return;
 		}
 	}
 }
