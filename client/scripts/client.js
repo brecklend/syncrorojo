@@ -50,7 +50,7 @@ function getListingsFor(listingType) {
 
 function trackCallback(response) {
 	if (response.Success) {
-		console.log("successfully tracking listing");
+		console.log("successfully tracking listing", response.Message);
 	}
 	else {
 		console.log(response.Message);
@@ -59,7 +59,7 @@ function trackCallback(response) {
 
 function ignoreCallback(response) {
 	if (response.Success) {
-		console.log("successfully ignored listing");
+		console.log("successfully ignored listing", response.Message);
 	}
 	else {
 		console.log(response.Message);

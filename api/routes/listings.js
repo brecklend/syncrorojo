@@ -1,9 +1,10 @@
-var fs = require("fs");
+var jsonIo = require("../utils/jsonIo");
 
-var listingsPath = "./data/listings.json";
 var listings;
 
-readJson();
+jsonIo.getListings(function(data) {
+	listings = data;
+});
 
 exports.getAllListings = function(req, res) {
 	res.send(listings);
@@ -19,45 +20,17 @@ exports.getTrackedListings = function(req, res) {
 
 exports.track = function(req, res) {
 	updateListingStatusFor(req.params.id, "tracked");
-	writeJson();
-	res.send({ "Success": true, "Message": "" });
+	jsonIo.saveListings(listings, function(rsp) {
+		res.send(rsp);
+	});
 };
 
 exports.ignore = function(req, res) {
 	updateListingStatusFor(req.params.id, "ignore");
-	writeJson();
-	res.send({ "Success": true, "Message": "" });
+	jsonIo.saveListings(listings, function(rsp) {
+		res.send(rsp);
+	});
 };
-
-
-
-
-
-function readJson() {
-	fs.readFile(listingsPath, "utf8", (err, data) => {
-		if (!err) {
-			listings = JSON.parse(data);
-		}
-		else {
-			listings = [];
-		}
-	});
-}
-
-function writeJson() {
-	fs.writeFile(listingsPath, JSON.stringify(listings, null, 4), function(err) {
-		if (err) {
-			console.log("error writing file");
-		}
-		else {
-			console.log("success writing file");
-		}
-	});
-}
-
-
-
-
 
 function getListingsFor(statusType) {
 	var list = [];
