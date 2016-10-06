@@ -35,16 +35,85 @@
 	</div>
 
 	<script>
+		var baseUrl = "http://localhost:8081/";
 		$(document).ready(function() {
 			//getJsonFile("http://localhost/cl/syncroRojo.json");
-			getNewListings();
+			//getNewListings();
+			getAllListings();
 		});
+
+		function createCorsReq(method, url) {
+			var xhr = new XMLHttpRequest();
+
+			if ("withCredentials" in xhr) {
+				xhr.open(method, url, true);
+			}
+			else if (typeof XDomainRequest != "undefined") {
+				xhr = new XDomainRequest();
+				xhr.open(method, url);
+			}
+			else {
+				xhr = null;
+			}
+
+			return xhr;
+		}
+
+		function getAllListings() {
+			var xhr = createCorsReq("GET", baseUrl + "getall");
+
+			if (!xhr) { 
+				console.log("CORS not supported");
+				return
+			}
+			
+			console.log("CORS supported");
+
+			xhr.onload = function() {
+				var text = xhr.responseText;
+				console.log("success", text);
+			};
+
+			xhr.onerror = function() {
+				console.log("xhr error");
+			};
+
+			xhr.send();
+		}
+
+
 
 		function getNewListings() {
 			$.getJSON("http://localhost:8081/getall", function(data) {
 				console.log("data", data);
 			});
 		}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 		var trackBtn = "<button type='button' class='btn btn-success btn-xs'><i class='fa fa-check' /></button>";
 		var ignoreBtn = "<button type='button' class='btn btn-danger btn-xs'><i class='fa fa-close' /></button>";

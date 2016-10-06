@@ -1,5 +1,6 @@
 var express = require("express");
 var listings = require("./routes/listings");
+var cors = require("./cors");
 var app = express();
 
 
@@ -9,6 +10,7 @@ var server = app.listen(8081, function() {
 	console.log("listening");
 });
 
+app.use(cors());
 
 app.get("/getAll", listings.getAll);
 app.get("/getNew", listings.getNew);
