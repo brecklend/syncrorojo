@@ -2,8 +2,9 @@ var fs = require("fs");
 
 var listings;
 
+getListings();
+
 exports.getAll = function(req, res) {
-	getListings();
 	res.send(listings);
 };
 
