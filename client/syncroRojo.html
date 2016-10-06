@@ -5,7 +5,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<title>~SyncroRojo~</title>
-	<script src="jquery-3.1.1.min.js"></script>
+	<script src="scripts/jquery-3.1.1.min.js"></script>
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha384-BVYiiSIFeK1dGmJRAkycuHAHRg32OmUcww7on3RYdg4Va+PmSTsz/K68vbdEjh4u" crossorigin="anonymous">
 	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap-theme.min.css" integrity="sha384-rHyoN1iRsVXV4nD0JutlnGaslCJuC7uwjduW9SVrLvRYooPp2bWYgmgJQIXwl/Sp" crossorigin="anonymous">
 	<script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha384-Tc5IQib027qvyjSMfHjOMaLkfuWVxZxUPnCJA7l2mCWNIpG9mGCD8wGNIcPD7Txa" crossorigin="anonymous"></script>
@@ -23,154 +23,46 @@
 		</div>
 		<div class="row">
 			<div class="col-md-12">
+				<table id="tbl-new-listings" class="table table-striped">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Price</th>
+							<th>State</th>
+							<th>City</th>
+							<th>Location</th>
+							<th>Posted</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+
 				<ul id="new-listings"></ul>
+
 			</div>
 		</div>
 
 		<div class="row">
 			<div class="col-md-12">
+				<table id="tbl-new-tracked" class="table table-striped">
+					<thead>
+						<tr>
+							<th>Title</th>
+							<th>Price</th>
+							<th>State</th>
+							<th>City</th>
+							<th>Location</th>
+							<th>Posted</th>
+						</tr>
+					</thead>
+					<tbody></tbody>
+				</table>
+
 				<ul id="tracked-listings"></ul>
+
 			</div>
 		</div>
 	</div>
-
-	<script>
-		var baseUrl = "http://localhost:8081/";
-		$(document).ready(function() {
-			//getJsonFile("http://localhost/cl/syncroRojo.json");
-			//getNewListings();
-			getAllListings();
-		});
-
-		function createCorsReq(method, url) {
-			var xhr = new XMLHttpRequest();
-
-			if ("withCredentials" in xhr) {
-				xhr.open(method, url, true);
-			}
-			else if (typeof XDomainRequest != "undefined") {
-				xhr = new XDomainRequest();
-				xhr.open(method, url);
-			}
-			else {
-				xhr = null;
-			}
-
-			return xhr;
-		}
-
-		function getAllListings() {
-			var xhr = createCorsReq("GET", baseUrl + "getall");
-
-			if (!xhr) { 
-				console.log("CORS not supported");
-				return
-			}
-			
-			console.log("CORS supported");
-
-			xhr.onload = function() {
-				var text = xhr.responseText;
-				console.log("success", text);
-			};
-
-			xhr.onerror = function() {
-				console.log("xhr error");
-			};
-
-			xhr.send();
-		}
-
-
-
-		function getNewListings() {
-			$.getJSON("http://localhost:8081/getall", function(data) {
-				console.log("data", data);
-			});
-		}
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-		var trackBtn = "<button type='button' class='btn btn-success btn-xs'><i class='fa fa-check' /></button>";
-		var ignoreBtn = "<button type='button' class='btn btn-danger btn-xs'><i class='fa fa-close' /></button>";
-
-		function getJsonFile(url) {
-			$.getJSON(url, function(data) {
-				var newListings = "";
-				var trackedListings ="";
-
-				$.each(data, function(key, val) {
-					var stateName = val.State.Name;
-					
-					$.each(val.State.Cities, function(key, val) {
-						var cityName = val.Name;
-						var cityUrl = val.Url;
-
-						$.each(val.Listings, function(key, val) {
-							var id = val.Id;
-							var title = val.Title;
-							var location = val.location;
-							var listingUrl = cityUrl + "/" + id + ".html";
-							var status = val.Status;
-							var listing = "<li><a href='" + listingUrl + "'>" + title + "</a></li>";
-
-							switch (status) {
-								case "":
-									//new
-									newListings += listing + trackBtn + ignoreBtn;
-									break;
-								case "Tracking":
-									//tracking
-									trackedListings += listing + ignoreBtn;
-									break;
-								case "Ignore":
-									//ignore
-									break;
-								default:
-									//exception
-									console.log("Status exception:", status);
-									break;
-							}
-						});
-					});
-				});
-
-				$("ul#new-listings").html(newListings);
-				$("ul#tracked-listings").html(trackedListings);
-			});
-		}
-
-		function track(listingId) {
-
-		}
-
-		function ignore(listingId) {
-
-		}
-	</script>
+	<script src="scripts/client.js"></script>
 </body>
 </html>

@@ -4,24 +4,24 @@ var listings;
 
 getListings();
 
-exports.getAll = function(req, res) {
+exports.getAllListings = function(req, res) {
 	res.send(listings);
 };
 
-exports.getNew = function(req, res) {
+exports.getNewListings = function(req, res) {
 	res.send(getListingsFor("new"));
 };
 
-exports.getTracked = function(req, res) {
+exports.getTrackedListings = function(req, res) {
 	res.send(getListingsFor("tracked"));
 };
 
 exports.track = function(req, res) {
-	res.send();
+	res.send({ "Success": true, "Message": "" });
 };
 
 exports.ignore = function(req, res) {
-	res.send();
+	res.send(["server ignore success"]);
 };
 
 function getListings() {

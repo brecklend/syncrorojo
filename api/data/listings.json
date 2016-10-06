@@ -1,22 +1,41 @@
 [
 	{
+		"id": 1010101010,
+		"url": "http://craigslist.org/",
+		"title": "Sample",
+		"price": [
+			1500,
+			1200
+		],
+		"location": "w",
+		"city": "f",
+		"state": "CA",
+		"datetime": [
+			"2016-09-18 13:32",
+			"2016-10-06 11:15"
+		],
+		"status": "new"
+	},
+	{
 		"id": 5787770027,
-		"url": "",
+		"url": "http://craigslist.org/",
 		"title": "94 gmc safari awd",
 		"price": [
-			1500
+			1500,
+			1200
 		],
 		"location": "w flag",
 		"city": "flagstaff / sedona",
-		"stat": "Arizona",
+		"state": "Arizona",
 		"datetime": [
-			"2016-09-18 13:32"
+			"2016-09-18 13:32",
+			"2016-10-06 11:15"
 		],
 		"status": "new"
 	},
 	{
 		"id": 5797773459,
-		"url": "",
+		"url": "http://craigslist.org/",
 		"title": "2001 E450 * 4 X 4 * BOX VAN! NICE!",
 		"price": [
 			6500,
@@ -33,7 +52,7 @@
 	},
 	{
 		"id": 5780376329,
-		"url": "",
+		"url": "http://craigslist.org/",
 		"title": "2002 CHRYSLER TOWN & COUNTRY",
 		"price": [
 			2000
@@ -48,7 +67,7 @@
 	},
 	{
 		"id": 5792506890,
-		"url": "",
+		"url": "http://craigslist.org/",
 		"title": "Mini van Saturn Relay 2005 for sale. 128000 miles",
 		"price": [
 			3500
@@ -63,7 +82,7 @@
 	},
 	{
 		"id": 5795692471,
-		"url": "",
+		"url": "http://craigslist.org/",
 		"title": "Great mini-van Saturn - 2005,$3550",
 		"price": [
 			3550
@@ -77,7 +96,7 @@
 	},
 	{
 		"id": 5798491459,
-		"url": "",
+		"url": "http://craigslist.org/",
 		"title": "1998 chevrolet all wheel drive astro van",
 		"price": [
 			1500
