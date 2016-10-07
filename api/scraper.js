@@ -42,13 +42,11 @@ function GetStatesAndCitiesFor(query) {
 
 					$(cities).each(function() {
 						var cityName = $(this).text();
-						console.log("sites url", $(this).find("a").attr("href"));
-						var cityUrl = cl.GetCityUrl($(this).find("a").attr("href"));
-						console.log("cityUrl", cityUrl);
-						var citySearchUrl = cl.BuildClSearchUrl($(this).find("a").attr("href"));
-						console.log("citySearchUrl", citySearchUrl);
+						var url = $(this).find("a").attr("href");
+						var cityUrl = cl.GetCityUrl(url);
+						var citySearchUrl = cl.BuildClSearchUrl(url);
 
-						//GetListingsFor(citySearchUrl, cityUrl, cityName, stateName, GetListingsCallback);
+						GetListingsFor(citySearchUrl, cityUrl, cityName, stateName, GetListingsCallback);
 					});
 				}
 			});
@@ -66,10 +64,7 @@ function GetListingsFor(citySearchUrl, cityUrl, cityName, stateName, callback) {
 
 			$("h4").prevAll().filter(function() {
 				var id = parseInt($(this).attr("data-pid"));
-				// http://sfbay.craigslist.org/
-				// 
 				var url = cityUrl + $(this).find("a").first().attr("href");
-				//  /eby/cto/5816432215.html
 				var title = $(this).find(".hdrlnk").text();
 				var price = parseInt($(this).find(".price").first().text().replace("$", ""));
 				var location = $(this).find("small").text().replace("(", "").replace(")", "");
