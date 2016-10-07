@@ -19,7 +19,6 @@ exports.saveListings = function(listings, callback) {
 			return callback({ Success: false, "Message": "Failed to write file" });
 		}
 		else {
-			console.log("success writing file");
 			return callback({ Success: true, "Message": "Successfully wrote file" });
 		}
 	});

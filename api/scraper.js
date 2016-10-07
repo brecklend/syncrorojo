@@ -12,6 +12,27 @@ var listings;
 jsonIo.getListings(function(data) {
 	listings = data;
 	GetStatesAndCitiesFor(states);
+	// var listing = getListingFor(5792506890);
+
+	// if (listing == undefined) {
+	// 	console.log("really undefined");
+	// }
+	// else {
+	// 	console.log("else");
+	// 	console.log(typeof(listing));
+	// 	if (listing.status != "ignore") {
+	// 		console.log("process listing");
+	// 		if (listing.price[listing.price.length - 1] != 4000) {
+	// 			console.log("add price to price array");
+	// 		}
+	// 		else {
+	// 			console.log("leave price because the current price is same as stored data");
+	// 		}
+	// 	}
+	// 	else {
+	// 		console.log("do nothing");
+	// 	}
+	// }
 })
 //*****************************************************************************
 
@@ -59,32 +80,29 @@ function GetListingsFor(cityUrl, cityName, stateName, callback) {
 			var $ = cheerio.load(html);
 
 			$("h4").prevAll().filter(function() {
-				var id = $(this).attr("data-pid");
+				var id = parseInt($(this).attr("data-pid"));
+				var url = "http://craigslist.com/needToBuildThis";
 				var title = $(this).find(".hdrlnk").text();
 				var price = $(this).find(".price").first().text().replace("$", "");
-				var priceAry = [];
 				var location = $(this).find("small").text().replace("(", "").replace(")", "");
 				var datetime = $(this).find("time").attr("datetime");
-				var datetimeAry = [];
 
-				// {
-			 //        "id": 1010101010,
-			 //        "url": "http://craigslist.org/",
-			 //        "title": "Sample",
-			 //        "price": [
-			 //            1500,
-			 //            1200
-			 //        ],
-			 //        "location": "w",
-			 //        "city": "f",
-			 //        "state": "CA",
-			 //        "datetime": [
-			 //            "2016-09-18 13:32",
-			 //            "2016-10-06 11:15"
-			 //        ],
-			 //        "status": "new"
-			 //    }
+				var listing = getListingFor(id);
+
+				if (listing === undefined) {
+					listings.push(buildNewListingObjectFor(id, url, title, price, location, cityName, stateName, datetime));
+				}
+				else {
+					if (listing.statue != "ignore") {
+						if (listing.price[listing.price.length - 1] != price) {
+							listing.price.push(price);
+							listing.datetime.push(price);
+						}
+					}
+				}
 			});
+
+			callback();
 		}
 		else {
 			console.log("failed request for city");
@@ -94,4 +112,42 @@ function GetListingsFor(cityUrl, cityName, stateName, callback) {
 
 function GetListingsCallback() {
 	console.log("GetListingsCallback");
+	jsonIo.saveListings(listings, function(rsp) {
+		if (rsp.Success) {
+			console.log("Successfully saved listings");
+		}
+		else {
+			console.log("Failed to save listings:", rsp.Message);
+		}
+	});
 }
+
+
+
+// Helpers ////////////////////////////////////////////////////////////////////
+function getListingFor(listingId) {
+	var listing;
+
+	for (var i = 0; i < listings.length; i++) {
+		if (listings[i].id == listingId) {
+			listing = listings[i];
+		}
+	}
+
+	return listing;
+}
+
+function buildNewListingObjectFor(id, url, title, price, location, city, state, datetime) {
+	return ({
+		"id": id,
+		"url": url,
+		"title": title,
+		"price": [price],
+		"location": location,
+		"city": city,
+		"state": state,
+		"datetime": [datetime],
+		"status": "new"
+	});
+}
+///////////////////////////////////////////////////////////////////////////////
