@@ -1,3 +1,7 @@
+// Notes //////////////////////////////////////////////////////////////////////
+// Every time this runs, api needs to be restarted
+///////////////////////////////////////////////////////////////////////////////
+
 var cl = require("./utils/_cl");
 var jsonIo = require("./utils/jsonIo");
 var request = require("request");
@@ -12,27 +16,6 @@ var listings;
 jsonIo.getListings(function(data) {
 	listings = data;
 	GetStatesAndCitiesFor(states);
-	// var listing = getListingFor(5792506890);
-
-	// if (listing == undefined) {
-	// 	console.log("really undefined");
-	// }
-	// else {
-	// 	console.log("else");
-	// 	console.log(typeof(listing));
-	// 	if (listing.status != "ignore") {
-	// 		console.log("process listing");
-	// 		if (listing.price[listing.price.length - 1] != 4000) {
-	// 			console.log("add price to price array");
-	// 		}
-	// 		else {
-	// 			console.log("leave price because the current price is same as stored data");
-	// 		}
-	// 	}
-	// 	else {
-	// 		console.log("do nothing");
-	// 	}
-	// }
 })
 //*****************************************************************************
 
@@ -61,6 +44,7 @@ function GetStatesAndCitiesFor(query) {
 						var cityName = $(this).text();
 						var cityUrl = $(this).find("a").attr("href");
 						var citySearchUrl = cl.BuildClSearchUrl(cityUrl);
+						console.log("  ", citySearchUrl);
 
 						console.log("  ", cityName);
 						GetListingsFor(citySearchUrl, cityName, stateName, GetListingsCallback);
@@ -83,7 +67,7 @@ function GetListingsFor(cityUrl, cityName, stateName, callback) {
 				var id = parseInt($(this).attr("data-pid"));
 				var url = "http://craigslist.com/needToBuildThis";
 				var title = $(this).find(".hdrlnk").text();
-				var price = $(this).find(".price").first().text().replace("$", "");
+				var price = parseInt($(this).find(".price").first().text().replace("$", ""));
 				var location = $(this).find("small").text().replace("(", "").replace(")", "");
 				var datetime = $(this).find("time").attr("datetime");
 
@@ -96,7 +80,7 @@ function GetListingsFor(cityUrl, cityName, stateName, callback) {
 					if (listing.statue != "ignore") {
 						if (listing.price[listing.price.length - 1] != price) {
 							listing.price.push(price);
-							listing.datetime.push(price);
+							listing.datetime.push(datetime);
 						}
 					}
 				}
