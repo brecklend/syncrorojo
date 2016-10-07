@@ -37,17 +37,18 @@ function GetStatesAndCitiesFor(query) {
 				var searchStates = new RegExp(query);
 
 				if (searchStates.exec(stateName)) {
-					console.log("Searching " + stateName + " for cities");
+					//console.log("Searching " + stateName + " for cities");
 					var cities = $(this).next("ul").children();
 
 					$(cities).each(function() {
 						var cityName = $(this).text();
-						var cityUrl = $(this).find("a").attr("href");
-						var citySearchUrl = cl.BuildClSearchUrl(cityUrl);
-						console.log("  ", citySearchUrl);
+						console.log("sites url", $(this).find("a").attr("href"));
+						var cityUrl = cl.GetCityUrl($(this).find("a").attr("href"));
+						console.log("cityUrl", cityUrl);
+						var citySearchUrl = cl.BuildClSearchUrl($(this).find("a").attr("href"));
+						console.log("citySearchUrl", citySearchUrl);
 
-						console.log("  ", cityName);
-						GetListingsFor(citySearchUrl, cityName, stateName, GetListingsCallback);
+						//GetListingsFor(citySearchUrl, cityUrl, cityName, stateName, GetListingsCallback);
 					});
 				}
 			});
@@ -58,14 +59,17 @@ function GetStatesAndCitiesFor(query) {
 	});
 }
 
-function GetListingsFor(cityUrl, cityName, stateName, callback) {
-	request(cityUrl, function(err, res, html) {
+function GetListingsFor(citySearchUrl, cityUrl, cityName, stateName, callback) {
+	request(citySearchUrl, function(err, res, html) {
 		if (!err) {
 			var $ = cheerio.load(html);
 
 			$("h4").prevAll().filter(function() {
 				var id = parseInt($(this).attr("data-pid"));
-				var url = "http://craigslist.com/needToBuildThis";
+				// http://sfbay.craigslist.org/
+				// 
+				var url = cityUrl + $(this).find("a").first().attr("href");
+				//  /eby/cto/5816432215.html
 				var title = $(this).find(".hdrlnk").text();
 				var price = parseInt($(this).find(".price").first().text().replace("$", ""));
 				var location = $(this).find("small").text().replace("(", "").replace(")", "");
