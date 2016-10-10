@@ -1,91 +1,166 @@
 [
     {
-        "id": 5792506890,
-        "url": "http://craigslist.com/needToBuildThis",
-        "title": "Mini van Saturn Relay 2005 for sale. 128000 miles",
+        "id": 5721680948,
+        "url": "http://localhost/cl/prescott.html/rvs/5721680948.html",
+        "title": "chinook motor home",
         "price": [
-            3000
+            19500
         ],
-        "location": "lvg",
-        "city": "bakersfield",
-        "state": "California",
+        "location": " prescott, Az.",
+        "city": "prescott",
+        "state": "Arizona",
         "datetime": [
-            "2016-09-28 06:48"
+            "2016-08-30 15:05"
         ],
         "status": "new"
     },
     {
-        "id": 5795692471,
-        "url": "http://craigslist.com/needToBuildThis",
-        "title": "Great mini-van Saturn - 2005,$3550",
+        "id": 5814837703,
+        "url": "http://localhost/cl/mohave.html/for/5814837703.html",
+        "title": "Chinook Plus 2 Ultralite",
         "price": [
-            3550
+            7500
         ],
-        "location": "lvg",
-        "city": "bakersfield",
-        "state": "California",
+        "location": " Lake Havasu City",
+        "city": "mohave county",
+        "state": "Arizona",
         "datetime": [
-            "2016-09-29 10:45"
+            "2016-10-05 15:04"
         ],
         "status": "new"
     },
     {
-        "id": 5798491459,
-        "url": "http://craigslist.com/needToBuildThis",
-        "title": "1998 chevrolet all wheel drive astro van",
+        "id": 5765389582,
+        "url": "http://localhost/cl/yuma.html/cto/5765389582.html",
+        "title": "76 Toyota chinook",
         "price": [
-            1500
+            2200
         ],
-        "location": "prc > White Spar Prescott",
-        "city": "bakersfield",
-        "state": "California",
+        "location": " Redway",
+        "city": "yuma",
+        "state": "Arizona",
         "datetime": [
-            "2016-09-27 10:37"
+            "2016-09-23 12:22"
         ],
         "status": "new"
     },
     {
-        "id": 5787770027,
-        "url": "http://craigslist.com/needToBuildThis",
-        "title": "94 gmc safari awd",
+        "id": 5750348730,
+        "url": "http://localhost/cl/inlandempire.html/rvs/5750348730.html",
+        "title": "Toyota chinook",
+        "price": [
+            3900
+        ],
+        "location": " upland",
+        "city": "inland empire",
+        "state": "California",
+        "datetime": [
+            "2016-09-02 16:24"
+        ],
+        "status": "new"
+    },
+    {
+        "id": 5806972694,
+        "url": "http://localhost/cl/inlandempire.html/rvs/5806972694.html",
+        "title": "1978 Toyota Chinook",
         "price": [
             1000
         ],
-        "location": " w flag",
-        "city": "flagstaff / sedona",
-        "state": "Arizona",
+        "location": " Yucaipa",
+        "city": "inland empire",
+        "state": "California",
         "datetime": [
-            "2016-09-18 13:32"
+            "2016-09-30 14:16"
         ],
         "status": "new"
     },
     {
-        "id": 5797773459,
-        "url": "http://craigslist.com/needToBuildThis",
-        "title": "2001 E450 * 4 X 4 * BOX VAN! NICE!",
+        "id": 5806990949,
+        "url": "http://localhost/cl/inlandempire.html/cto/5806990949.html",
+        "title": "Toyota chinook",
         "price": [
-            6000
+            1000
         ],
-        "location": " PAYSON",
-        "city": "flagstaff / sedona",
-        "state": "Arizona",
+        "location": " Yucaipa",
+        "city": "inland empire",
+        "state": "California",
         "datetime": [
-            "2016-09-24 17:06"
+            "2016-09-30 14:42"
         ],
         "status": "new"
     },
     {
-        "id": 5780376329,
-        "url": "http://craigslist.com/needToBuildThis",
-        "title": "2002 CHRYSLER TOWN & COUNTRY",
+        "id": 5817922181,
+        "url": "http://localhost/cl/losangeles.html/lac/rvs/5817922181.html",
+        "title": "78 TOYOTA CHINOOK-MINI CAMPER- 20r motor,4 speed manual-runs----curren",
         "price": [
-            2000
+            2500
         ],
-        "location": " FLAG",
-        "city": "flagstaff / sedona",
-        "state": "Arizona",
+        "location": " Glendale",
+        "city": "los angeles",
+        "state": "California",
         "datetime": [
-            "2016-09-25 08:10"
+            "2016-10-07 14:19"
+        ],
+        "status": "new"
+    },
+    {
+        "id": 5821938149,
+        "url": "http://localhost/cl/losangeles.html/lac/rvs/5821938149.html",
+        "title": "TOYOTA CHINOOK-MINI CAMPER- 20r motor,4 speed manual-runs----currently",
+        "price": [
+            2500
+        ],
+        "location": " Eaglerock Glendale",
+        "city": "los angeles",
+        "state": "California",
+        "datetime": [
+            "2016-10-10 10:22"
+        ],
+        "status": "new"
+    },
+    {
+        "id": 5819303782,
+        "url": "http://localhost/cl/santabarbara.html/rvs/5819303782.html",
+        "title": "Chinook",
+        "price": [
+            19500
+        ],
+        "location": "",
+        "city": "santa barbara",
+        "state": "California",
+        "datetime": [
+            "2016-10-08 12:46"
+        ],
+        "status": "new"
+    },
+    {
+        "id": 5777340743,
+        "url": "http://localhost/cl/portland.html/clc/cto/5777340743.html",
+        "title": "1981 Toyota w 1973 Chinook camper shell",
+        "price": [
+            4000
+        ],
+        "location": " Milwaukie",
+        "city": "portland",
+        "state": "Oregon",
+        "datetime": [
+            "2016-09-11 16:06"
+        ],
+        "status": "new"
+    },
+    {
+        "id": 5818361126,
+        "url": "http://localhost/cl/portland.html/nco/rvs/5818361126.html",
+        "title": "2005 Caravan Camper for  2-Low-Low Miles",
+        "price": [
+            4995
+        ],
+        "location": " Naselle, WA",
+        "city": "portland",
+        "state": "Oregon",
+        "datetime": [
+            "2016-10-07 20:37"
         ],
         "status": "new"
     }

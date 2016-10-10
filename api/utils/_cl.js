@@ -14,7 +14,9 @@ exports.GetCityUrl = function(url) {
 	var url = replaceProtocalPrefix(url);
 
 	//trim last forward slash
-	url = url.substr(0, url.length - 1);
+	if (url.substr(url.length - 1) == "/") {
+		url = url.substr(0, url.length - 1);
+	}
 
 	return url;
 }
@@ -27,14 +29,19 @@ function replaceProtocalPrefix(url) {
 }
 
 function getUrlSearchString() {
-	return "search/sss?sort=rel&query=";
+	var searchString = new String();
+
+	//searchString = "search/sss?sort=rel&query=";
+
+	return searchString;
 }
 
 function getKeywords() {
 	var keywords = new String();
 
 	//keywords = "4wd+van";
-	keywords = "pinzgauer";
+	//keywords = "pinzgauer";
+	//keywords = "chinook+camper+toyota";
 
 	return keywords;
 }
