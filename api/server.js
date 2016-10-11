@@ -7,7 +7,7 @@ var app = express();
 var server = app.listen(8081, function() {
 	var host = server.address().address;
 	var port = server.address().port;
-	console.log("listening");
+	console.log("API (port 8081)");
 });
 
 app.use(cors());

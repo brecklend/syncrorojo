@@ -4,11 +4,13 @@ var router = express.Router();
 var path = __dirname + "/views/";
 
 router.use(function (req, res, next) {
-	//console.log("/" + req.method);
 	next();
 });
 
 router.get("/", function (req, res) {
+	// console.log("index start");
+	
+	// console.log("index end");
 	res.sendFile(path + "index.html");
 });
 
@@ -27,5 +29,5 @@ app.use("*", function (req, res) {
 });
 
 app.listen(3000, function () {
-	console.log("Live at port 3000");
+	console.log("Client2 (port 3000)");
 });
