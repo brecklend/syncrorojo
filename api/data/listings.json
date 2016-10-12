@@ -1,20 +1,5 @@
 [
     {
-        "id": 5721680948,
-        "url": "http://localhost/cl/prescott.html/rvs/5721680948.html",
-        "title": "chinook motor home",
-        "price": [
-            19500
-        ],
-        "location": " prescott, Az.",
-        "city": "prescott",
-        "state": "Arizona",
-        "datetime": [
-            "2016-08-30 15:05"
-        ],
-        "status": "new"
-    },
-    {
         "id": 5814837703,
         "url": "http://localhost/cl/mohave.html/for/5814837703.html",
         "title": "Chinook Plus 2 Ultralite",
@@ -26,6 +11,21 @@
         "state": "Arizona",
         "datetime": [
             "2016-10-05 15:04"
+        ],
+        "status": "new"
+    },
+    {
+        "id": 5721680948,
+        "url": "http://localhost/cl/prescott.html/rvs/5721680948.html",
+        "title": "chinook motor home",
+        "price": [
+            19500
+        ],
+        "location": " prescott, Az.",
+        "city": "prescott",
+        "state": "Arizona",
+        "datetime": [
+            "2016-08-30 15:05"
         ],
         "status": "new"
     },

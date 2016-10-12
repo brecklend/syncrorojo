@@ -7,6 +7,7 @@ var jsonIo = require("./utils/jsonIo");
 var request = require("request");
 var cheerio = require("cheerio");
 var fs = require("fs");
+var config = require("./config");
 
 
 
@@ -21,8 +22,8 @@ jsonIo.getListings(function(data) {
 
 
 
-var states = "Arizona|California|Idaho|Nevada|Oregon|Washington";
-var sitesUrl = "http://localhost/cl/sites.html";
+var states = config.search_states;
+var sitesUrl = config.sites_url;
 
 
 
